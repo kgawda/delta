@@ -125,3 +125,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
+
+try:
+    from .settings_local import *
+except ModuleNotFoundError:
+    pass
