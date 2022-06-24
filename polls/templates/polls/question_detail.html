@@ -1,0 +1,26 @@
+{% extends "polls/base.html" %}
+{% block content %}
+
+<h1>{{ object }}</h1>
+<p>Poll {{ object.id }}</p>
+<p>Answers:</p>
+{% for answer in object.answer_set.all %}
+    <div style="margin: 30px">
+        <h3>{{ answer }}</h3>
+        {% if answer.vote_set.all %}
+            <p>Voted by:
+            {% for vote in  answer.vote_set.all %}
+                {{ vote.user }}
+            {% endfor %}
+            </p>
+        {% endif %}
+        <form action="{% url 'vote' answer.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Vote for {{answer}}">
+        </form>
+    </div>
+{% endfor %}
+
+<a href="{% url 'answer_add' question.id  %}">Add another answer</a>
+
+{% endblock %}

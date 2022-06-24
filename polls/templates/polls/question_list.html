@@ -1,0 +1,16 @@
+{% extends "polls/base.html" %}
+{% block content %}
+
+<p>Polls:</p>
+<ul>
+    {% for object in object_list %}
+    <li>
+        <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'question_add' %}">Add another question</a>
+
+
+{% endblock %}
