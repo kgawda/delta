@@ -2,7 +2,9 @@
 {% block content %}
 
 <h1>Add a new answer</h1>
-<h2>for question "{{ question }}"</h2>
+{% if question %}
+    <h2>for question "{{ question }}"</h2>
+{% endif %}
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Add">
