@@ -29,4 +29,4 @@ class Vote(models.Model):
     )
 
     def __str__(self):
-        return f"{self.answer.text} by {self.user.name}"
+        return self.answer.text + ' by ' + self.user.name
