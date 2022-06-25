@@ -134,6 +134,13 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': 'django.log',
+            'encoding': 'utf-8',
+            'level': 'DEBUG',
         }
     },
     'formatters': {
@@ -143,7 +150,7 @@ LOGGING = {
         },
     },
     'root': {
-        'handlers': ['console'],
+        'handlers': ['console', 'file'],
         'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
     }
 }
