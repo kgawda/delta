@@ -14,15 +14,19 @@ logger = logging.getLogger(__name__)
 class HomeView(TemplateView):
     template_name = "polls/home.html"
 
+
 class QuestionList(ListView):
     model = Question
+
 
 class QuestionDetail(DetailView):
     model = Question
 
+
 class QuestionAdd(CreateView):
     model = Question
     fields = ['text']
+
 
 class AnswerAdd(CreateView):
     model = Answer
@@ -41,12 +45,14 @@ class AnswerAdd(CreateView):
     def get_success_url(self):
         return reverse('question', args=(self.kwargs["question_id"],))
 
+
 class AnswerAddFullForm(CreateView):
     model = Answer
     fields = ['text', 'question']
 
     def get_success_url(self):
         return reverse('question', args=(self.object.question.id,))
+
 
 class AddVote(View):
     def post(self, request, answer_id):
