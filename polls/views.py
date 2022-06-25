@@ -48,7 +48,7 @@ class AnswerAddFullForm(CreateView):
 
 class AddVote(View):
     def post(self, request, answer_id):
-        logger.info("Uwaga! Przykładoy wpis w logach!")
+        logger.info("Rozpoczęto dodawanie głosu user=%s __name__=%s", request.user, __name__)
         user = request.user
         answer = get_object_or_404(Answer, id=answer_id)
         vote = Vote(user=user, answer=answer)
