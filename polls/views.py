@@ -1,9 +1,13 @@
+import logging
+
 from django.shortcuts import redirect, get_object_or_404, reverse
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
 from django.views import View
 
-
 from .models import Question, Answer, Vote
+
+logger = logging.getLogger(__name__)
+
 
 class HomeView(TemplateView):
     template_name = "polls/home.html"
@@ -44,6 +48,7 @@ class AnswerAddFullForm(CreateView):
 
 class AddVote(View):
     def post(self, request, answer_id):
+        logger.info("Uwaga! Przykładoy wpis w logach!")
         user = request.user
         answer = get_object_or_404(Answer, id=answer_id)
         vote = Vote(user=user, answer=answer)
