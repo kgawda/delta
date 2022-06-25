@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 
+
 class Question(models.Model):
     text = models.CharField(max_length=256)
 
@@ -28,4 +29,4 @@ class Vote(models.Model):
     )
 
     def __str__(self):
-        return self.answer.text + '/' + self.user.name
+        return self.answer.text + ' by ' + self.user.name
