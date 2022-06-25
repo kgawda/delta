@@ -35,6 +35,13 @@ class AnswerAdd(CreateView):
     def get_success_url(self):
         return reverse('question', args=(self.kwargs["question_id"],))
 
+class AnswerAddFullForm(CreateView):
+    model = Answer
+    fields = ['text', 'question']
+
+    def get_success_url(self):
+        return reverse('question', args=(self.object.question.id,))
+
 class AddVote(View):
     def post(self, request, answer_id):
         user = request.user
