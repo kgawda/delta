@@ -59,6 +59,11 @@ class AddVote(View):
             "Właśnie oddałeś głos",
             f"Oddałeś głos na opcję {answer}",
             None,  # from_email: If None, Django will use the value of the DEFAULT_FROM_EMAIL setting.
-            [user.email]
+            [user.email],
+            fail_silently=True,
         )
         return redirect("question", answer.question.id)
+
+        # Odpalanie testowego serwera SMTP drukującego na konsoli:
+        # pip install aiosmtpd
+        # python -m aiosmtpd -n -l localhost:25
