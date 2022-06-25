@@ -3,6 +3,8 @@ import logging
 from django.shortcuts import redirect, get_object_or_404, reverse
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
 from django.views import View
+from django.core.mail import send_mail
+
 
 from .models import Question, Answer, Vote
 
@@ -53,4 +55,10 @@ class AddVote(View):
         answer = get_object_or_404(Answer, id=answer_id)
         vote = Vote(user=user, answer=answer)
         vote.save()
+        send_mail(
+            "Właśnie oddałeś głos",
+            f"Oddałeś głos na opcję {answer}",
+            None,  # from_email: If None, Django will use the value of the DEFAULT_FROM_EMAIL setting.
+            [user.email]
+        )
         return redirect("question", answer.question.id)
