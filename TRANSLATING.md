@@ -6,6 +6,7 @@ Tlumaczenie strony
 - `python manage.py makemessages -l pl`
 - W szablonach:
   - Dodajemy `{% load i18n %}` na samej górze (ale po `extends`)
+    - Bez tego będziemy dostawać błędy np. "Invalid block tag on line 7: 'translate', expected 'endblock'. Did you forget to register or load this tag?"
   - Używamy np. `{% translate "Welcome on Polls page" %}`
 - W modelach i widokach:
   - ...

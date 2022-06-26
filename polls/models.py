@@ -1,9 +1,13 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 class Question(models.Model):
-    text = models.CharField(max_length=256)
+    text = models.CharField(max_length=256, verbose_name=_("text"))
+    class Meta:
+        verbose_name = _("question")
+        verbose_name_plural = _("questions")
 
     def __str__(self):
         return self.text
@@ -14,7 +18,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    text = models.CharField(max_length=256)
+    text = models.CharField(max_length=256, verbose_name=_("text"))
 
     def __str__(self):
         return self.text

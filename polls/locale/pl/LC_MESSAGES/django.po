@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-26 10:27+0200\n"
+"POT-Creation-Date: 2022-06-26 11:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,18 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
+#: .\polls\models.py:7 .\polls\models.py:21
+msgid "text"
+msgstr "tekst"
+
+#: .\polls\models.py:9
+msgid "question"
+msgstr "pytanie"
+
+#: .\polls\models.py:10
+msgid "questions"
+msgstr "pytania"
+
 #: .\polls\templates\polls\home.html:6
 msgid "Welcome on Polls page"
 msgstr "Witaj na stronie z ankietami"
@@ -29,10 +41,53 @@ msgid ""
 "\n"
 "This page allows for group voting.\n"
 "Each poll consists of one \"question\" and multiple \"answers\".\n"
-msgstr "Ta strona pozwala na głosowanie w kilka osób.\n"
+msgstr ""
+"\n"
+"Ta strona pozwala na głosowanie w kilka osób.\n"
 "Każda ankieta składa się z jednego \"pytania\" i wielu \"odpowiedzi\".\n"
 
 #. Translators: text of link
 #: .\polls\templates\polls\home.html:16
 msgid "See our polls"
 msgstr "Zobacz ankiety"
+
+#: .\polls\templates\polls\question_form.html:8
+#: .\polls\templates\polls\question_form.html:12
+msgctxt "write to disk"
+msgid "Save"
+msgstr "Zapisz"
+
+#: .\polls\templates\polls\question_form.html:11
+msgctxt "money"
+msgid "Save"
+msgstr "Oszczędzaj"
+
+#: .\polls\templates\polls\question_list.html:5
+#, python-format
+msgid ""
+"\n"
+"We have one Poll:\n"
+msgid_plural ""
+"\n"
+"We have %(polls_count)s Polls:\n"
+msgstr[0] ""
+"\n"
+"Mamy jedną ankietę:\n"
+msgstr[1] ""
+"\n"
+"Mamy %(polls_count)s ankiety:\n"
+msgstr[2] ""
+"\n"
+"Mamy %(polls_count)s ankiet:\n"
+msgstr[3] ""
+"\n"
+"Mamy %(polls_count)s ankiet:\n"
+
+#: .\polls\views.py:66
+msgid "You have just voted"
+msgstr "Właśnie oddałeś głos"
+
+#: .\polls\views.py:67
+#, python-format
+msgid "You have just voted for %s"
+msgstr "Właśnie zagłosowałeś na %s"

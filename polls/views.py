@@ -1,10 +1,12 @@
 import logging
 
+from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404, reverse
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
 from django.views import View
 from django.core.mail import send_mail
-
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext, ngettext
 
 from .models import Question, Answer, Vote
 
@@ -62,8 +64,8 @@ class AddVote(View):
         vote = Vote(user=user, answer=answer)
         vote.save()
         send_mail(
-            "Właśnie oddałeś głos",
-            f"Oddałeś głos na opcję {answer}",
+            _("You have just voted"),
+            _("You have just voted for %s") % answer,
             None,  # from_email: If None, Django will use the value of the DEFAULT_FROM_EMAIL setting.
             [user.email],
             fail_silently=True,
@@ -73,3 +75,15 @@ class AddVote(View):
         # Odpalanie testowego serwera SMTP drukującego na konsoli:
         # pip install aiosmtpd
         # python -m aiosmtpd -n -l localhost:25
+
+
+class TranslateExample(View):
+    def get(self, request):
+        text = ""
+        text += pgettext('money', 'Save') + "\n"
+        text += pgettext('write to disk', 'Save') + "\n"
+        text += ngettext("\nWe have one Poll:\n", "\nWe have %(polls_count)s Polls:\n", 0) % {'polls_count': 0}
+        text += ngettext("\nWe have one Poll:\n", "\nWe have %(polls_count)s Polls:\n", 1) % {'polls_count': 1}
+        text += ngettext("\nWe have one Poll:\n", "\nWe have %(polls_count)s Polls:\n", 2) % {'polls_count': 2}
+        text += ngettext("\nWe have one Poll:\n", "\nWe have %(polls_count)s Polls:\n", 5) % {'polls_count': 5}
+        return HttpResponse(text)

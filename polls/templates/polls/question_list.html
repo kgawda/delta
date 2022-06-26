@@ -1,8 +1,20 @@
 {% extends "polls/base.html" %}
+{% load i18n %}
 {% block content %}
 
-<p>We have {{object_list | length}} Poll{{ object_list | length | pluralize }}:</p>
+<p>{% blocktranslate count polls_count=object_list|length %}
+We have one Poll:
+{% plural %}
+We have {{polls_count}} Polls:
+{% endblocktranslate %}</p>
+
+{# jeśli mamy więcej zmiennych, to: {% blocktranslate count polls_count=... with a=... b=... %} #}
+
+{#<p>{% blocktranslate with polls_count=object_list|length %} We have {{polls_count}} Polls: {% endblocktranslate %}</p>#}
+{# <p>We have {{object_list | length}} Poll{{ object_list | length | pluralize }}:</p> #}
+
 {# Przykłady: walrus{{ 2|pluralize:"es" }} cherr{{ 2|pluralize:"y,ies" }} #}
+
 <ul>
     {% for object in object_list %}
     <li>
