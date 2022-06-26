@@ -1,0 +1,39 @@
+{% extends 'polls/base.html' %}
+{% load i18n %}
+{% load l10n %}
+{% load tz %}
+
+{% block content %}
+
+Duża liczba: {{ number }}
+<br>
+Data z czasem: {{ date }}
+<br>
+Data z czasem z timezone: {{date_tz}}
+
+<br>
+<br>
+
+{% localize off %}
+<i>bash script.sh {{ number }}</i>
+{% endlocalize %}
+<br>
+<i>bash script.sh {{ number | unlocalize }}</i>
+<br>
+<br>
+
+Bez lokalizacji TZ: <BR>
+{% localtime off %}
+{{ date }}
+<br>
+{{date_tz}}
+{% endlocaltime %}
+<br>
+{{date_tz | utc }}
+<br>
+<br>
+
+A w Nowym Yorku:<br>
+{{date_tz | timezone:"America/New_York" }}
+
+{% endblock %}

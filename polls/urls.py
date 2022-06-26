@@ -9,5 +9,6 @@ urlpatterns = [
     path("question/<int:question_id>/add_answer", views.AnswerAdd.as_view(), name="answer_add"),
     path("vote/<int:answer_id>", views.AddVote.as_view(), name="vote"),
     path("answer_add", views.AnswerAddFullForm.as_view()),
-    path("translate_examples", views.TranslateExample.as_view())
+    path("translate_examples", views.TranslateExample.as_view()),
+    path("localize_examples", views.LocalizeExample.as_view()),
 ]

@@ -1,7 +1,7 @@
 import logging
 
 from django.http import HttpResponse
-from django.shortcuts import redirect, get_object_or_404, reverse
+from django.shortcuts import redirect, get_object_or_404, reverse, render
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
 from django.views import View
 from django.core.mail import send_mail
@@ -87,3 +87,14 @@ class TranslateExample(View):
         text += ngettext("\nWe have one Poll:\n", "\nWe have %(polls_count)s Polls:\n", 2) % {'polls_count': 2}
         text += ngettext("\nWe have one Poll:\n", "\nWe have %(polls_count)s Polls:\n", 5) % {'polls_count': 5}
         return HttpResponse(text)
+
+class LocalizeExample(View):
+    def get(self, request):
+        import datetime
+        from django.utils import timezone
+        context = {
+            'number': 10000000.5,
+            'date': datetime.datetime.now(),  # nie używać kiedy USE_TZ = True
+            'date_tz': timezone.now()
+        }
+        return render(request, 'polls/localization_example.html', context)
