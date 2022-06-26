@@ -1,7 +1,8 @@
 {% extends "polls/base.html" %}
 {% block content %}
 
-<p>Polls:</p>
+<p>We have {{object_list | length}} Poll{{ object_list | length | pluralize }}:</p>
+{# Przykłady: walrus{{ 2|pluralize:"es" }} cherr{{ 2|pluralize:"y,ies" }} #}
 <ul>
     {% for object in object_list %}
     <li>
