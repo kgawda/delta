@@ -1,8 +1,18 @@
 {% extends 'polls/base.html' %}
+{% load i18n %}
 
 {% block content %}
 
-<h1>Welcome on Polls page</h1>
-<a href="{% url 'questions' %}">See our polls</a>
+<h1>{% translate "Welcome on Polls page" %}</h1>
+
+<p>
+{% blocktranslate %}
+This page allows for group voting.
+Each poll consists of one "question" and multiple "answers".
+{% endblocktranslate %}
+</p>
+
+{# Translators: text of link #}
+<a href="{% url 'questions' %}">{% translate "See our polls" %}</a>
 
 {% endblock %}
