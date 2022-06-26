@@ -1,5 +1,6 @@
 import logging
 
+from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404, reverse, render
 from django.views.generic import TemplateView, DetailView, ListView, CreateView
@@ -8,7 +9,11 @@ from django.core.mail import send_mail
 from django.utils.translation import gettext as _
 from django.utils.translation import pgettext, ngettext
 
+from rest_framework import viewsets
+from rest_framework import permissions
+
 from .models import Question, Answer, Vote
+from . import serializers
 
 logger = logging.getLogger(__name__)
 
@@ -98,3 +103,21 @@ class LocalizeExample(View):
             'date_tz': timezone.now()
         }
         return render(request, 'polls/localization_example.html', context)
+
+class QuestionViewset(viewsets.ModelViewSet):
+    serializer_class = serializers.QuestionSerializer
+    queryset = Question.objects.all()
+
+class AnswerViewset(viewsets.ModelViewSet):
+    serializer_class = serializers.AnswerSerializer
+    queryset = Answer.objects.all()
+
+class VoteViewset(viewsets.ModelViewSet):
+    serializer_class = serializers.VoteSerializer
+    queryset = Vote.objects.all()
+
+class UserViewset(viewsets.ModelViewSet):
+    serializer_class = serializers.UserSerializer
+    queryset = get_user_model().objects.all()
+
+
